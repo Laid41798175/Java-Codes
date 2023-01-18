@@ -1,6 +1,6 @@
-package euler;
+package projectEuler;
 
-public class PE30 {
+public class Problem30 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub

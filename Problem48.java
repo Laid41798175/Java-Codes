@@ -1,6 +1,6 @@
-package euler;
+package projectEuler;
 
-public class PE48 {
+public class Problem48 {
 
 	public static void main(String[] args) {
 		long sum = 0;

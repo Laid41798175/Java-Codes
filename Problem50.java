@@ -1,8 +1,8 @@
-package euler;
+package projectEuler;
 
 import java.util.ArrayList;
 
-public class PE50 {
+public class Problem50 {
 
 	public static void main(String[] args) {
 		prime = new ArrayList<>();
