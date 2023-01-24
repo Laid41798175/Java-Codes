@@ -1,30 +1,25 @@
-package mathematics;
+package primeNumbers;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 
-public class PrimeFactorization {
+public class Ex7 { // primeFactorization with primes()
 
 	static long start;
 	static long end;
 	
-	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	static ArrayList<Integer> list;
+	
 	static StringBuilder sb = new StringBuilder();
 	
-	public static void main(String[] args) throws IOException {
-		String str = br.readLine();
-		int n = Integer.parseInt(str);
-		
+	public static void main(String[] args)  {		
 		start = System.currentTimeMillis();
-		primeFactorization(n);
+		primeFactorization(1435494919);
 		end = System.currentTimeMillis();
 		printTime();
 	}
 
 	static void primeFactorization(int n) {
-		if (n == 1) return;
 		int[] arr = primes((int) Math.sqrt(n));
 		for (int i = 0; i < arr.length; i++) {
 			while (n % arr[i] == 0) {
@@ -62,6 +57,7 @@ public class PrimeFactorization {
 		}
 		
 		return Arrays.copyOf(arr, index);
+
 	}
 	
 	static void printTime() {
