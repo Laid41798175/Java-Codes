@@ -1,14 +1,11 @@
 package primeNumbers;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Ex7 { // primeFactorization with primes()
 
 	static long start;
 	static long end;
-	
-	static ArrayList<Integer> list;
 	
 	static StringBuilder sb = new StringBuilder();
 	
