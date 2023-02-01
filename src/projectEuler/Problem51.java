@@ -5,7 +5,6 @@ import java.util.ArrayList;
 public class Problem51 {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		primeNumbers = new ArrayList<>();
 
 		for (int i = 1; i < 1000000; i++) {
@@ -49,9 +48,8 @@ public class Problem51 {
 		}
 
 		for (int i = 2; i <= Math.sqrt(num); i++) {
-			if (num % i == 0) {
+			if (num % i == 0)
 				return false;
-			}
 		}
 		return true;
 	}
@@ -90,11 +88,11 @@ public class Problem51 {
 		for (int i = 0; i <= 9; i++) {
 			int rep = replace(num, digits, i);
 			if (100000 < rep && isPrime(rep)) {
-				str = str.concat(String.valueOf(rep)+" ");
+				str = str.concat(String.valueOf(rep) + " ");
 				count++;
 			}
 		}
-		
+
 		if (count >= 8) {
 			System.out.println(num + ": " + count);
 			System.out.println(str);
