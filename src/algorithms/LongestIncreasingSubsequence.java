@@ -3,6 +3,7 @@ package algorithms;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Vector;
 
 public class LongestIncreasingSubsequence {
 
@@ -27,37 +28,50 @@ public class LongestIncreasingSubsequence {
 
 		int[] d = lis(arr);
 		
-		int ans = 0;
-		for (int i = 1; i <= n; i++) {
-			int val = d[i];
-			if (val > ans) ans = val;
-		}
-		
-		System.out.println(ans);
+		System.out.println(max);
 	}
-
+	
+	static int max = 0;
+	
 	static int[] lis (int[] arr) {
 		int[] d = new int[n + 1];
 		int[] a = new int[n + 1];
-		d[0] = 0;
-		a[0] = 0;
-		int max = 0;
-		for (int i = 1; i <= n; i++) {
-			boolean flag = true;
-			for (int j = 1; j <= max; j++) {
-				if (arr[i] <= a[j]) { // May use binary search
-					flag = false;
-					d[i] = j;
-					a[j] = arr[i];
-					break;
-				}
-			}
-			if (flag) {
-				max++;
-				a[max] = arr[i];
-				d[i] = max;
+		
+		d[1] = 1;
+		a[1] = arr[1];
+		
+		max = 1;
+		for (int i = 2; i <= n; i++) {			
+			int index = binarySearch(a, max, arr[i]);
+			d[i] = index;
+			a[index] = arr[i];
+			
+			if (max < index) {
+				max = index;
 			}
 		}
+			
 		return d;
-	}	
+	}
+	
+	static int binarySearch(int[] a, int aMax, int value) { // a is sorted
+		int start = 1;
+		int end = aMax; // inclusive
+		while (start < end) {
+			int half = (start + end) / 2;
+			if (a[half] == value) {
+				return half;
+			} else if (a[half] < value) {
+				start = half + 1;
+			} else { // if (value < a[half]) {
+				end = half;
+			}
+		}
+		
+		if (end == aMax && a[aMax] < value) {
+			return aMax + 1;
+		}
+		
+		return start;		
+	}
 }

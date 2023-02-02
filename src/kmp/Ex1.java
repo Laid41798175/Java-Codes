@@ -15,10 +15,8 @@ public class Ex1 {
 
 	public static void main(String[] args) throws IOException {
 
-		String str = br.readLine();
-		String tgt = br.readLine();
-		// String str = Ex0.littleWomen();
-		// String tgt = "have";
+		String str = Ex0.littleWomen();
+		String tgt = "have to";
 
 		Vector<Integer> vec;
 
@@ -32,10 +30,6 @@ public class Ex1 {
 	static Vector<Integer> find(String str, String tgt) {
 		Vector<Integer> ret = new Vector<>();
 		int[] pi = pi(tgt);
-		
-		for (int i = 0; i < pi.length; i++) {
-			System.out.println(pi[i]);
-		}
 
 		int n = str.length();
 		int m = tgt.length();

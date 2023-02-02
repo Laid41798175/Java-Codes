@@ -31,18 +31,24 @@ public class Calculator {
 		String postfix = "";
 		for (int i = 0; i < perm.length; i++) {
 			if (perm[i].compareTo("+") == 0) {
-				while (!s.empty() && (s.peek() == '*' || s.peek() == '/')) {
-					postfix += s.pop() + " ";
+				while (!s.empty() && (s.peek() != '(')) {
+					postfix += s.pop();
 				}
 				s.push('+');
 			} else if (perm[i].compareTo("-") == 0) {
-				while (!s.empty() && (s.peek() == '*' || s.peek() == '/')) {
-					postfix += s.pop() + " ";
+				while (!s.empty() && (s.peek() != '(')) {
+					postfix += s.pop();
 				}
 				s.push('-');
 			} else if (perm[i].compareTo("*") == 0) {
+				while (!s.empty() && (s.peek() == '*' || s.peek() == '/') ) {
+					postfix += s.pop();
+				}
 				s.push('*');
 			} else if (perm[i].compareTo("/") == 0) {
+				while (!s.empty() && (s.peek() == '*' || s.peek() == '/') ) {
+					postfix += s.pop();
+				}
 				s.push('/');
 			} else if (perm[i].compareTo("(") == 0) {
 				s.push('(');

@@ -13,7 +13,7 @@ public class Ex0 {
 		
 		String str = littleWomen();
 		System.out.println(str.length());
-		String tgt = "have";
+		String tgt = "have to";
 		
 		Vector<Integer> vec; 
 		
