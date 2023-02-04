@@ -27,9 +27,9 @@ public class Fibonacci {
 		}
 		bnr += "1";
 		
-		Matrix idt = Matrix.identity();
-		Matrix[] Ms = new Matrix[bnr.length() + 1];
-		Matrix M = new Matrix(1, 1, 1, 0);
+		FibMatrix idt = FibMatrix.identity();
+		FibMatrix[] Ms = new FibMatrix[bnr.length() + 1];
+		FibMatrix M = new FibMatrix(1, 1, 1, 0);
 		for (int i = 0; i < bnr.length(); i++) {
 			if (i == 0) {
 				Ms[0] = M;
@@ -46,19 +46,19 @@ public class Fibonacci {
 	}
 }
 
-class Matrix {
+class FibMatrix {
 
 	final static long X = 1_000_000_007;
 	long[][] mat = new long[2][2];
 
-	Matrix(long a00, long a01, long a10, long a11) {
+	FibMatrix(long a00, long a01, long a10, long a11) {
 		mat[0][0] = a00;
 		mat[0][1] = a01;
 		mat[1][0] = a10;
 		mat[1][1] = a11;
 	}
 
-	Matrix() {
+	FibMatrix() {
 	}
 	
 	public void print() {
@@ -66,12 +66,12 @@ class Matrix {
 		System.out.println(mat[1][0] + " " + mat[1][1]);
 	}
 
-	public static Matrix identity() {
-		return new Matrix(1, 0, 0, 1);
+	public static FibMatrix identity() {
+		return new FibMatrix(1, 0, 0, 1);
 	}
 
-	public Matrix multiply(Matrix m) {
-		Matrix ret = new Matrix();
+	public FibMatrix multiply(FibMatrix m) {
+		FibMatrix ret = new FibMatrix();
 		ret.mat[0][0] = ((mat[0][0] * m.mat[0][0]) % X + (mat[0][1] * m.mat[1][0]) % X) % X;
 		ret.mat[0][1] = ((mat[0][0] * m.mat[0][1]) % X + (mat[0][1] * m.mat[1][1]) % X) % X;
 		ret.mat[1][0] = ((mat[1][0] * m.mat[0][0]) % X + (mat[1][1] * m.mat[1][0]) % X) % X;

@@ -30,18 +30,12 @@ public class Dijkstra {
 		v = Integer.parseInt(spl[0]);
 		e = Integer.parseInt(spl[1]);
 
-		isVisited = new boolean[v + 1];
-		length = new int[v + 1];
-		Arrays.fill(length, X);
-
 		vs = new Vertex[v + 1];
 		for (int i = 1; i <= v; i++) {
 			vs[i] = new Vertex(i);
 		}
 
-		str = br.readLine();
 		start = Integer.parseInt(str);
-		length[start] = 0;
 
 		for (int i = 0; i < e; i++) {
 			str = br.readLine();
@@ -49,6 +43,21 @@ public class Dijkstra {
 			vs[Integer.parseInt(spl[0])].addEdge(Integer.parseInt(spl[1]), Integer.parseInt(spl[2]));
 		}
 
+		length = dijkstra(start);
+		
+		for (int i = 1; i <= v; i++) {
+			sb.append(length[i] == X ? "INF\n" : (length[i] + "\n"));
+		}
+		System.out.print(sb);
+	}
+	
+	public static int[] dijkstra(int start) {
+		boolean[] isVisited = new boolean[v + 1];
+		int[] length = new int[v + 1];
+		Arrays.fill(length, X);
+		
+		length[start] = 0;
+		
 		PriorityQueue<Pair> pq = new PriorityQueue<>();
 		
 		pq.add(new Pair(0, start));		
@@ -63,12 +72,8 @@ public class Dijkstra {
 					pq.add(new Pair(length[e.to], e.to));
 				}
 			}
-		}		
-		
-		for (int i = 1; i <= v; i++) {
-			sb.append(length[i] == X ? "INF\n" : (length[i] + "\n"));
 		}
-		System.out.print(sb);
+		return length;
 	}
 }
 
