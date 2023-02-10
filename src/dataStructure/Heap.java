@@ -101,5 +101,4 @@ public class Heap {
 		}
 		array[parent] = target;			
 	}
-
 }
