@@ -1,4 +1,4 @@
-package algorithms;
+package graphs;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -68,7 +68,7 @@ public class Dijkstra {
 			for (int i = 0; i < vs[p.vertex].edges.size(); i++) {
 				Edge e = vs[p.vertex].edges.get(i);
 				if (!isVisited[e.to] && length[p.vertex] + e.w < length[e.to]) {
-					length[e.to] = length[p.vertex] + e.w;
+					length[e.to] = (int) (length[p.vertex] + e.w);
 					pq.add(new Pair(length[e.to], e.to));
 				}
 			}
@@ -112,12 +112,17 @@ class Vertex {
 	}
 }
 
-class Edge {
+class Edge implements Comparable<Edge> {
 	int to;
-	int w;
+	double w;
 
-	Edge(int t, int w) {
+	Edge(int t, double w) {
 		to = t;
 		this.w = w;
+	}
+	
+	@Override
+	public int compareTo(Edge o) {
+		return Double.compare(w, o.w);
 	}
 }

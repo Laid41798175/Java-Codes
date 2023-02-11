@@ -1,9 +1,8 @@
-package algorithms;
+package graphs;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class BellmanFord {
@@ -48,7 +47,7 @@ public class BellmanFord {
 				Vertex v = vs[k];
 				for (int l = 0; l < v.edges.size(); l++) {
 					if (length[k] + v.edges.get(l).w < length[v.edges.get(l).to]) {
-						length[v.edges.get(l).to] = length[k] + v.edges.get(l).w;
+						length[v.edges.get(l).to] = (int) (length[k] + v.edges.get(l).w);
 					}
 				}
 			}				
