@@ -22,8 +22,8 @@ public class MatrixPower {
 
 		String bnr = "";
 		while (num.compareTo(BigInteger.ONE) != 0) {
-			bnr += num.remainder(BigInteger.TWO).toString();
-			num = num.divide(BigInteger.TWO);
+			bnr += num.testBit(0) ? "1" : "0";
+			num = num.shiftRight(1);
 		}
 		bnr += "1";
 

@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Vector;
 
-public class KnuthMorrisPratt {
+public class KMP {
 
 	static long start;
 	static long end;

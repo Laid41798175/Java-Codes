@@ -3,11 +3,13 @@ package algorithms;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
-public class LongestIncreasingSubsequence {
+public class LIS {
 
 	static StringBuilder sb = new StringBuilder();
 	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	static StringTokenizer stk;
 
 	static int n;
 
@@ -20,40 +22,54 @@ public class LongestIncreasingSubsequence {
 		int[] arr = new int[n + 1];
 
 		str = br.readLine();
-		spl = str.split(" ");
+		stk = new StringTokenizer(str);
 		for (int i = 0; i < n; i++) {
-			arr[i + 1] = Integer.parseInt(spl[i]);
+			arr[i + 1] = Integer.parseInt(stk.nextToken());
 		}
 
-		int[] d = lis(arr);
-		
-		System.out.println(max);
+		lis(arr);
 	}
-	
+
 	static int max = 0;
-	
-	static int[] lis (int[] arr) {
-		int[] d = new int[n + 1];
-		int[] a = new int[n + 1];
-		
-		d[1] = 1;
-		a[1] = arr[1];
-		
-		max = 1;
-		for (int i = 2; i <= n; i++) {			
-			int index = binarySearch(a, max, arr[i]);
-			d[i] = index;
-			a[index] = arr[i];
-			
+	static int maxIndex = -1;
+
+	static void lis(int[] arr) {
+		int[] prev = new int[n + 1];
+		int[] aValue = new int[n + 1];
+		int[] aIndex = new int[n + 1];
+
+		max = 0;
+		for (int i = 1; i <= n; i++) {
+			int index = binarySearch(aValue, max, arr[i]);
+
+			aValue[index] = arr[i];
+			prev[i] = aIndex[index - 1];
+			aIndex[index] = i;
+
 			if (max < index) {
 				max = index;
+				maxIndex = i;
 			}
 		}
-			
-		return d;
+
+		sb.append(max + "\n");
+		int[] ans = new int[max];
+		int idx = 0;
+		while (maxIndex != 0) {
+			ans[idx++] = arr[maxIndex];
+			maxIndex = prev[maxIndex];
+		}
+		for (int i = max - 1; i >= 0; i--) {
+			sb.append(ans[i] + " ");
+		}
+		System.out.println(sb);
 	}
-	
+
 	static int binarySearch(int[] a, int aMax, int value) { // a is sorted
+		if (aMax == 0) {
+			return 1;
+		}
+
 		int start = 1;
 		int end = aMax; // inclusive
 		while (start < end) {
@@ -66,11 +82,11 @@ public class LongestIncreasingSubsequence {
 				end = half;
 			}
 		}
-		
+
 		if (end == aMax && a[aMax] < value) {
 			return aMax + 1;
 		}
-		
-		return start;		
+
+		return start;
 	}
 }
