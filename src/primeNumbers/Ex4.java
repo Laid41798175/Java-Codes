@@ -9,7 +9,7 @@ public class Ex4 {
 
 	public static void main(String[] args) {
 		start = System.currentTimeMillis();
-		int[] arr = primes(123456789);
+		int[] arr = primes(100);
 		end = System.currentTimeMillis();
 		printArray(arr);
 		printTime();

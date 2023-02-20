@@ -68,61 +68,61 @@ public class Dijkstra {
 			for (int i = 0; i < vs[p.vertex].edges.size(); i++) {
 				Edge e = vs[p.vertex].edges.get(i);
 				if (!isVisited[e.to] && length[p.vertex] + e.w < length[e.to]) {
-					length[e.to] = (int) (length[p.vertex] + e.w);
+					length[e.to] = length[p.vertex] + e.w;
 					pq.add(new Pair(length[e.to], e.to));
 				}
 			}
 		}
 		return length;
 	}
-}
-
-class Pair implements Comparable<Pair> {
-	int length;
-	int vertex;
 	
-	Pair (int length, int index) {
-		this.length = length;
-		vertex = index;
-	}
+	static class Pair implements Comparable<Pair> {
+		int length;
+		int vertex;
+		
+		Pair (int length, int index) {
+			this.length = length;
+			vertex = index;
+		}
 
-	@Override
-	public int compareTo(Pair o) {
-		if (length < o.length) {
-			return -1;
-		} else if (length == o.length) {
-			return 0;
-		} else {
-			return 1;
+		@Override
+		public int compareTo(Pair o) {
+			if (length < o.length) {
+				return -1;
+			} else if (length == o.length) {
+				return 0;
+			} else {
+				return 1;
+			}
 		}
 	}
-}
 
-class Vertex {
-	int num;
-	ArrayList<Edge> edges;
+	static class Vertex {
+		int num;
+		ArrayList<Edge> edges;
 
-	Vertex(int n) {
-		num = n;
-		edges = new ArrayList<>();
+		Vertex(int n) {
+			num = n;
+			edges = new ArrayList<>();
+		}
+
+		public void addEdge(int to, int w) {
+			edges.add(new Edge(to, w));
+		}
 	}
 
-	public void addEdge(int to, int w) {
-		edges.add(new Edge(to, w));
-	}
-}
+	static class Edge implements Comparable<Edge> {
+		int to;
+		int w;
 
-class Edge implements Comparable<Edge> {
-	int to;
-	double w;
-
-	Edge(int t, double w) {
-		to = t;
-		this.w = w;
-	}
-	
-	@Override
-	public int compareTo(Edge o) {
-		return Double.compare(w, o.w);
+		Edge(int t, int w) {
+			to = t;
+			this.w = w;
+		}
+		
+		@Override
+		public int compareTo(Edge o) {
+			return w - o.w;
+		}
 	}
 }

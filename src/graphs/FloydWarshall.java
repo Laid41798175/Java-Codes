@@ -37,12 +37,10 @@ public class FloydWarshall {
 			cost[x][y] = Math.min(cost[x][y], Integer.parseInt(spl[2]));
 		}
 		
-		for (int i = 1; i <= n; i++) {			
-			for (int j = 1; j <= n; j++) {
-				if (j == i) continue;
-				for (int k = 1; k <= n; k++) {
-					if (k == i) continue;
-					cost[j][k] = Math.min(cost[j][k], cost[j][i] + cost[i][k]);
+		for (int k = 1; k <= n; k++) { // note that index k is on the top
+			for (int i = 1; i <= n; i++) {
+				for (int j = 1; j <= n; j++) {
+					cost[i][j] = Math.min(cost[i][j], cost[i][k] + cost[k][j]);
 				}
 			}
 		}

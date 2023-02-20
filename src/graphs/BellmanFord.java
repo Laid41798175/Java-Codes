@@ -3,6 +3,7 @@ package graphs;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class BellmanFord {
@@ -42,22 +43,22 @@ public class BellmanFord {
 		}
 		
 		length[1] = 0;
-		for (int j = 0; j < n - 1; j++) {
-			for (int k = 1; k <= n; k++) {
-				Vertex v = vs[k];
-				for (int l = 0; l < v.edges.size(); l++) {
-					if (length[k] + v.edges.get(l).w < length[v.edges.get(l).to]) {
-						length[v.edges.get(l).to] = (int) (length[k] + v.edges.get(l).w);
+		for (int i = 0; i < n - 1; i++) {
+			for (int j = 1; j <= n; j++) {
+				Vertex v = vs[j];
+				for (int k = 0; k < v.edges.size(); k++) {
+					if (length[j] + v.edges.get(k).w < length[v.edges.get(k).to]) {
+						length[v.edges.get(k).to] = (int) (length[j] + v.edges.get(k).w);
 					}
 				}
 			}				
 		}
 		
 		boolean hasCycle = false;
-		for (int k = 1; k <= n; k++) {
-			Vertex v = vs[k];
-			for (int l = 0; l < v.edges.size(); l++) {
-				if (length[k] + v.edges.get(l).w < length[v.edges.get(l).to]) {
+		for (int i = 1; i <= n; i++) {
+			Vertex v = vs[i];
+			for (int j = 0; j < v.edges.size(); j++) {
+				if (length[i] + v.edges.get(j).w < length[v.edges.get(j).to]) {
 					hasCycle = true; // there is a negative cycle
 					break;
 				}
@@ -74,6 +75,35 @@ public class BellmanFord {
 				sb.append(length[i] + " ");
 			}
 			System.out.println(sb);
+		}
+	}
+	
+	static class Vertex {
+		int num;
+		ArrayList<Edge> edges;
+
+		Vertex(int n) {
+			num = n;
+			edges = new ArrayList<>();
+		}
+
+		public void addEdge(int to, int w) {
+			edges.add(new Edge(to, w));
+		}
+	}
+	
+	static class Edge implements Comparable<Edge> {
+		int to;
+		int w;
+
+		Edge(int t, int w) {
+			to = t;
+			this.w = w;
+		}
+		
+		@Override
+		public int compareTo(Edge o) {
+			return w - o.w;
 		}
 	}
 }
