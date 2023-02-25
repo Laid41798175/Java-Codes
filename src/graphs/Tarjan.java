@@ -61,14 +61,14 @@ public class Tarjan {
 		isVisited[curr] = true;
 		for (int i = 0; i < vertex[curr].edges.size(); i++) {
 			int to = vertex[curr].edges.get(i);
-			if (isSCC[to]) {
+			if (isSCC[to]) { // 이미 SCC의 요소라면 continue, 어차피 현재 노드는 그 SCC의 요소가 절대 아님
 				continue;
 			}
 
 			if (!isVisited[to]) {
 				ret = Math.min(ret, dfs(to)); // 방문 순서대로 붙였기 때문에 최솟값이 가장 부모 노드
 			} else {
-				ret = Math.min(ret, vertex[to].num); // 대상이 방문했다면 방문 순서를 얻어오면 됨
+				ret = Math.min(ret, vertex[to].num); // 대상을 방문했다면 방문 순서를 얻어오면 됨, 방문하지 않았다면 dfs로 호출해서 알아오기
 			}
 		}
 
@@ -85,7 +85,7 @@ public class Tarjan {
 			SCClist.add(scc);
 		}
 
-		return ret;
+		return ret; // vertex[curr].num 의 최솟값을 반복해 제일 부모 노드를 리턴.
 	}
 
 	public static void appendSCClist() {
